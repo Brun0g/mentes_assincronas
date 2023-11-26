@@ -3,9 +3,9 @@ const { Pool } = require("pg");
 const pool = new Pool({
   host: "localhost",
   port: 5432,
-  user: "",
+  user: "postgres",
   password: "",
-  database: "",
+  database: "pdv",
 });
 
 pool.query("SELECT NOW()", (err, res) => {
