@@ -5,7 +5,7 @@ const insertCategories = async (req, res) => {
   const { descricao } = req.body;
 
   if (!descricao) {
-    return res.status(400).json({ message: "Description must be filled." });
+    return res.status(400).json({ message: "Description must be fi lled." });
   }
 
   try {
