@@ -1,6 +1,5 @@
-require("dotenv").config();
 const { pool } = require("../model/model.js");
-
+require("dotenv").config();
 const insertCategories = async (req, res) => {
   const { descricao } = req.body;
 
