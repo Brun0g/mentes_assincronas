@@ -2,10 +2,10 @@ require("dotenv").config();
 const { pool } = require("../model/model");
 
 const registrationValidation = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { nome, email, senha } = req.body;
 
   try {
-    if (!name || !email || !password) {
+    if (!nome || !email || !senha) {
       return res.status(400).json({ mensagem: "All fields are mandatory." });
     }
     if (!email.includes("@")) {
@@ -15,7 +15,6 @@ const registrationValidation = async (req, res, next) => {
     if (existingEmail.rowCount >= 1) {
       return res.status(404).json({ mensagem: "There is already a registered user with the email provided." });
     }
-
     next();
   } catch (error) {
     console.error(error);
