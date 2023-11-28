@@ -22,6 +22,6 @@ routes.post("/login", loginUser);
 routes.use(authenticateLogin);
 
 routes.get("/usuario", userProfile);
-routes.put("/usuario", updateUser);
+routes.put("/usuario", registrationValidation, updateUser);
 
 module.exports = routes;
