@@ -1,10 +1,11 @@
-const { pool } = require("../model/model.js");
 require("dotenv").config();
+const { pool } = require("../model/model.js");
+
 const insertCategories = async (req, res) => {
   const { descricao } = req.body;
 
   if (!descricao) {
-    return res.status(400).json({ message: "Description must be fi lled." });
+    return res.status(400).json({ message: "Description must be filled." });
   }
 
   try {
