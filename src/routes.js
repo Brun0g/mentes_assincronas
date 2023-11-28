@@ -13,13 +13,14 @@ const { updateUser } = require("./controller/updateUser");
 
 const routes = express();
 
-routes.post("/insertCategory", insertCategories);
-routes.get("/listCategory", listCategory);
+routes.post("/categoria", insertCategories);
+routes.get("/categoria", listCategory);
 
 routes.post("/usuario", registrationValidation, userRegistration);
 
 routes.post("/login", loginUser);
 routes.use(authenticateLogin);
+
 routes.get("/usuario", userProfile);
 routes.put("/usuario", updateUser);
 
