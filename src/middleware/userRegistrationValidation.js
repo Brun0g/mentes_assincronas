@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { pool } = require("../model/model");
 
-const registrationValidation = async (req, res, next) => {
+const userRegistrationValidation = async (req, res, next) => {
   const { nome, email, senha } = req.body;
 
   try {
@@ -21,6 +21,4 @@ const registrationValidation = async (req, res, next) => {
     return res.status(500).json({ mensagem: "Internal server error" });
   }
 };
-module.exports = {
-  registrationValidation,
-};
+module.exports = userRegistrationValidation;
