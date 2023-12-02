@@ -1,7 +1,7 @@
 const express = require("express");
 
-const { registrationValidation } = require("./middleware/registrationValidation");
-const { userRegistration } = require("./controller/userRegistration");
+const userRegistrationValidation = require("./middleware/userRegistrationValidation");
+const userRegistration = require("./controller/userRegistration");
 
 const insertCategories = require("./controller/insertCategories");
 const listCategory = require("./controller/listCategories");
@@ -12,6 +12,8 @@ const { loginUser } = require("./controller/userLogin");
 const { userProfile } = require("./controller/userProfile");
 const { updateUser } = require("./controller/updateUser");
 const categoryValidation = require("./middleware/categoryValidation");
+const customerRegistration = require("./controller/customerRegistration");
+const customerRegistrationValidation = require("./middleware/customerRegistrationValidation")
 
 const routes = express();
 
@@ -19,12 +21,13 @@ routes.post("/categoria", insertCategories);
 routes.get("/categoria", listCategory);
 routes.post("/produto", categoryValidation, productRegister);
 
-routes.post("/usuario", registrationValidation, userRegistration);
-
+routes.post("/usuario", userRegistrationValidation, userRegistration);
 routes.post("/login", loginUser);
+
 routes.use(authenticateLogin);
 
 routes.get("/usuario", userProfile);
-routes.put("/usuario", registrationValidation, updateUser);
+routes.put("/usuario", userRegistrationValidation, updateUser);
+routes.post("/cliente", customerRegistrationValidation, customerRegistration);
 
 module.exports = routes;
