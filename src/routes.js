@@ -17,6 +17,7 @@ const clientValidation = require("./middleware/clientValidation");
 const updateClient = require("./controller/updateClient");
 const detailClient = require("./controller/detailClient");
 const productUpdate = require("./controller/productUpdate");
+const productDelete = require("./controller/productDelete");
 
 const routes = express();
 
@@ -34,5 +35,6 @@ routes.put("/cliente/:id", clientValidation, updateClient);
 routes.get("/cliente", detailClient);
 routes.post("/produto", categoryValidation, productRegister);
 routes.put("/produto/:id", categoryValidation, productUpdate);
+routes.delete("/produto/:id", productDelete);
 
 module.exports = routes;
