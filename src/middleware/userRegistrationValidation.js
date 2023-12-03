@@ -18,7 +18,7 @@ const userRegistrationValidation = async (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ mensagem: "Internal server error" });
+    return res.status(500).json({ mensagem: "User validation error." });
   }
 };
 module.exports = userRegistrationValidation;
