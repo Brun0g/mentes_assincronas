@@ -16,13 +16,12 @@ const clientRegistration = require("./controller/clientRegistration");
 const clientValidation = require("./middleware/clientValidation");
 const updateClient = require("./controller/updateClient");
 const detailClient = require("./controller/detailClient");
+const productUpdate = require("./controller/productUpdate");
 
 const routes = express();
 
 routes.post("/categoria", insertCategories);
 routes.get("/categoria", listCategory);
-routes.post("/produto", categoryValidation, productRegister);
-
 routes.post("/usuario", userRegistrationValidation, userRegistration);
 routes.post("/login", loginUser);
 
@@ -32,6 +31,8 @@ routes.get("/usuario", userProfile);
 routes.put("/usuario", userRegistrationValidation, updateUser);
 routes.post("/cliente", clientValidation, clientRegistration);
 routes.put("/cliente/:id", clientValidation, updateClient);
-routes.get("/cliente", detailClient)
+routes.get("/cliente", detailClient);
+routes.post("/produto", categoryValidation, productRegister);
+routes.put("/produto/:id", categoryValidation, productUpdate);
 
 module.exports = routes;
