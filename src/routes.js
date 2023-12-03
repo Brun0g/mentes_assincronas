@@ -12,9 +12,10 @@ const { loginUser } = require("./controller/userLogin");
 const { userProfile } = require("./controller/userProfile");
 const { updateUser } = require("./controller/updateUser");
 const categoryValidation = require("./middleware/categoryValidation");
-const customerRegistration = require("./controller/customerRegistration");
-const customerRegistrationValidation = require("./middleware/customerRegistrationValidation");
-const { updateCustomer } = require("./controller/updateCustomer");
+const clientRegistration = require("./controller/clientRegistration");
+const clientValidation = require("./middleware/clientValidation");
+const updateClient = require("./controller/updateClient");
+const detailClient = require("./controller/detailClient");
 
 const routes = express();
 
@@ -29,7 +30,8 @@ routes.use(authenticateLogin);
 
 routes.get("/usuario", userProfile);
 routes.put("/usuario", userRegistrationValidation, updateUser);
-routes.post("/cliente", customerRegistrationValidation, customerRegistration);
-routes.put("/cliente/:id", customerRegistrationValidation, updateCustomer);
+routes.post("/cliente", clientValidation, clientRegistration);
+routes.put("/cliente/:id", clientValidation, updateClient);
+routes.get("/cliente", detailClient)
 
 module.exports = routes;
