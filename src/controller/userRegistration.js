@@ -7,7 +7,7 @@ const userRegistration = async (req, res) => {
 
   try {
     const encryptedPass = await bcrypt.hash(senha, 10);
-    const newUser = await pool.query("insert into usuarios (nome, email, senha) values ($1, $2, $3) returning *", [nome, email, encryptedPass]);
+    const newUser = await pool.query("insert into usuarios (nome = $1, email = $2, senha = $3)", [nome, email, encryptedPass]);
     const { senha: _, ...userRegistration } = newUser.rows[0];
 
     return res.status(201).json(userRegistration);
