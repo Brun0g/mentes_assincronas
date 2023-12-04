@@ -36,7 +36,7 @@ routes.post("/cliente", clientValidation, clientRegistration);
 routes.put("/cliente/:id", clientValidation, updateClient);
 routes.get("/cliente", detailClient);
 routes.post("/produto", categoryValidation, productRegister);
-routes.get("/produto/", listProducts);
+routes.get("/produto", listProducts);
 routes.get("/produto/:id", productDetail);
 routes.put("/produto/:id", categoryValidation, productUpdate);
 routes.delete("/produto/:id", productDelete);
