@@ -18,6 +18,7 @@ const updateClient = require("./controller/updateClient");
 const detailClient = require("./controller/detailClient");
 const productUpdate = require("./controller/productUpdate");
 const productDelete = require("./controller/productDelete");
+const productDetail = require("./controller/productDetail");
 
 const routes = express();
 
@@ -34,6 +35,7 @@ routes.post("/cliente", clientValidation, clientRegistration);
 routes.put("/cliente/:id", clientValidation, updateClient);
 routes.get("/cliente", detailClient);
 routes.post("/produto", categoryValidation, productRegister);
+routes.get("/produto/:id", productDetail);
 routes.put("/produto/:id", categoryValidation, productUpdate);
 routes.delete("/produto/:id", productDelete);
 
