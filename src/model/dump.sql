@@ -14,7 +14,7 @@ CREATE TABLE categorias (
 
 CREATE TABLE produtos (
     id SERIAL PRIMARY KEY,
-    descricao VARCHAR(255),
+    descricao VARCHAR(255) UNIQUE,
     quantidade_estoque INT,
     valor DECIMAL(10,2),
     categoria_id INT,
