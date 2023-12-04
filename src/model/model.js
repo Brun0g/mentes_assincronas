@@ -10,6 +10,7 @@ const pool = new Pool({
   database: process.env.DB_NAME,
 });
 
+
 pool.query("SELECT NOW()", (err, res) => {
   if (err) {
     console.error("Erro na conexão:", err);

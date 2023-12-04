@@ -2,7 +2,7 @@ require("dotenv").config();
 const { pool } = require("../model/model");
 
 const clientValidation = async (req, res, next) => {
-    const { nome, email, cpf, cep } = req.body;
+    const { nome, email, cpf } = req.body;
 
     try {
         if (!nome || !email || !cpf) {
@@ -19,9 +19,9 @@ const clientValidation = async (req, res, next) => {
         if (formatCpf.length !== 11) {
             return res.status(400).json({ mensagem: 'invalid cpf.' });
         }
-        const formatCep = cep.split('');
-        if (formatCep.length !== 8) {
-            return res.status(400).json({ mensagem: 'invalid cep.' });
+        const existingCpf = await pool.query("select * from clientes where cpf = $1", [cpf]);
+        if (existingCpf.rowCount >= 1) {
+            return res.status(404).json({ mensagem: "There is already a registered user with the cpf provided." });
         }
 
         next()
