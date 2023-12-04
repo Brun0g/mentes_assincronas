@@ -17,7 +17,6 @@ const productDetail = async (req, res) => {
 
         return res.status(200).json({ produto: selectedProduct });
     } catch (error) {
-        console.log(error.message);
         return res.status(500).json({ message: "Internal server error" });
     }
 };
