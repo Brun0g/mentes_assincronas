@@ -13,7 +13,7 @@ const productRegister = async (req, res) => {
 
         const insertedProduct = result.rows[0];
 
-        return res.status(201).json({ message: "Product registered successfully!", product: insertedProduct });
+        return res.status(201).json(insertedProduct);
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({ message: "Internal server error" });
