@@ -9,6 +9,14 @@ const productUpdate = async (req, res) => {
         return res.status(400).json({ message: "All fields are mandatory!" });
     }
 
+    if (quantidade_estoque <= 0 || isNaN(quantidade_estoque)) {
+        return res.status(400).json({ message: "The stock quantity must be a positive integer!" });
+    }
+
+    if (valor <= 0 || isNaN(valor)) {
+        return res.status(400).json({ message: "The product price must be a positive integer!" });
+    }
+
     try {
         const idProduct = await pool.query("SELECT COUNT(id) FROM produtos WHERE id = $1", [id]);
 
