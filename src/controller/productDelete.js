@@ -15,7 +15,7 @@ const productDelete = async (req, res) => {
 
         const deletedProduct = result.rows[0];
 
-        return res.status(200).json({ message: "Product deleted successfully!", product: deletedProduct });
+        return res.status(200).json();
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
     }

@@ -20,8 +20,7 @@ const productUpdate = async (req, res) => {
 
         const updatedProduct = result.rows[0];
 
-        return res.status(200).json({ message: "Product updated successfully!", product: updatedProduct });
-
+        return res.status(200).json();
 
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
