@@ -8,6 +8,14 @@ const productRegister = async (req, res) => {
         return res.status(400).json({ message: "All fields are mandatory!" });
     }
 
+    if (quantidade_estoque <= 0 || isNaN(quantidade_estoque)) {
+        return res.status(400).json({ message: "The stock quantity must be a positive integer!" });
+    }
+
+    if (valor <= 0 || isNaN(valor)) {
+        return res.status(400).json({ message: "The product price must be a positive integer!" });
+    }
+
     try {
         const result = await pool.query("INSERT INTO produtos (descricao, quantidade_estoque, valor, categoria_id) VALUES ($1, $2, $3, $4) RETURNING id, descricao, quantidade_estoque, valor, categoria_id", [descricao, quantidade_estoque, valor, categoria_id]);
 
