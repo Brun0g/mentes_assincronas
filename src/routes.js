@@ -34,7 +34,7 @@ routes.get("/usuario", userProfile);
 routes.put("/usuario", userRegistrationValidation, updateUser);
 routes.post("/cliente", clientValidation, clientRegistration);
 routes.put("/cliente/:id", clientValidation, updateClient);
-routes.get("/cliente", detailClient);
+routes.get("/cliente/:id", detailClient);
 routes.post("/produto", categoryValidation, productRegister);
 routes.get("/produto", listProducts);
 routes.get("/produto/:id", productDetail);
