@@ -13,6 +13,10 @@ const loginUser = async (req, res) => {
       return res.status(404).json({ message: "Invalid email or password" });
     }
 
+    if (!senha || !userWithEmail.rows[0].senha) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
     const validPassword = await bcrypt.compare(senha, userWithEmail.rows[0].senha);
 
     if (!validPassword) {
@@ -23,7 +27,9 @@ const loginUser = async (req, res) => {
     const { senha: _, ...loggedInUser } = userWithEmail.rows[0];
 
     return res.json({ user: loggedInUser, token });
+
   } catch (error) {
+
     return res.status(500).json({ message: "Unexpected server error!" });
   }
 };
