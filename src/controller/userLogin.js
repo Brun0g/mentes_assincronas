@@ -27,10 +27,8 @@ const loginUser = async (req, res) => {
     const { senha: _, ...loggedInUser } = userWithEmail.rows[0];
 
     return res.json({ user: loggedInUser, token });
-
   } catch (error) {
-
-    return res.status(500).json({ message: "Unexpected server error!" });
+    return res.status(500).json({ message: "Unexpected server error!" + error.message });
   }
 };
 

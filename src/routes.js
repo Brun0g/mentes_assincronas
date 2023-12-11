@@ -12,6 +12,8 @@ const { loginUser } = require("./controller/userLogin");
 const { userProfile } = require("./controller/userProfile");
 const { updateUser } = require("./controller/updateUser");
 const categoryValidation = require("./middleware/categoryValidation");
+const validateBodyRequest = require("./middleware/validateBodyRequest");
+const esquemaPedido = require("./middleware/esquemaRequest");
 const clientRegistration = require("./controller/clientRegistration");
 const clientValidation = require("./middleware/clientValidation");
 const updateClient = require("./controller/updateClient");
@@ -20,6 +22,7 @@ const productUpdate = require("./controller/productUpdate");
 const productDelete = require("./controller/productDelete");
 const productDetail = require("./controller/productDetail");
 const listProducts = require("./controller/listProducts");
+const { requests } = require("./controller/requests");
 
 const routes = express();
 
@@ -40,5 +43,6 @@ routes.get("/produto", listProducts);
 routes.get("/produto/:id", productDetail);
 routes.put("/produto/:id", categoryValidation, productUpdate);
 routes.delete("/produto/:id", productDelete);
+routes.post("/pedido", validateBodyRequest(esquemaPedido), requests);
 
 module.exports = routes;
