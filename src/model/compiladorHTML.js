@@ -4,7 +4,7 @@ async function compiladorHTML() {
   try {
     const filePath = "../Email.html";
     const fileContent = await fs.readFile(filePath, "utf8");
-    console.log(fileContent);
+    return fileContent;
   } catch (error) {
     console.error("Error reading the file:", error);
   }
