@@ -1,1 +1,1 @@
-module.exports = "mentes_assincronas";
+module.exports = process.env.JWT;
