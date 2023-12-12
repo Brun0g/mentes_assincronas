@@ -72,6 +72,7 @@ const requests = async (req, res) => {
       subject: "Order registration",
       html: email_html,
     });
+    console.log(clientExists.rows[0].email);
 
     return res.status(201).json({ Mensagem: "Order created successfully.", record });
   } catch (error) {
