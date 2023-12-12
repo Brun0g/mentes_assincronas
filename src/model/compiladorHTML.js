@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 
 async function compiladorHTML() {
   try {
-    const filePath = "../Email.html";
+    const filePath = "./src/Email.html";
     const fileContent = await fs.readFile(filePath, "utf8");
     return fileContent;
   } catch (error) {
