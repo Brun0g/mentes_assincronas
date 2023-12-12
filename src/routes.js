@@ -23,6 +23,7 @@ const productDelete = require("./controller/productDelete");
 const productDetail = require("./controller/productDetail");
 const listProducts = require("./controller/listProducts");
 const { requests } = require("./controller/requests");
+const listClient = require("./controller/listClients");
 
 const routes = express();
 
@@ -37,6 +38,7 @@ routes.get("/usuario", userProfile);
 routes.put("/usuario", userRegistrationValidation, updateUser);
 routes.post("/cliente", clientValidation, clientRegistration);
 routes.put("/cliente/:id", clientValidation, updateClient);
+routes.get("/cliente", listClient)
 routes.get("/cliente/:id", detailClient);
 routes.post("/produto", categoryValidation, productRegister);
 routes.get("/produto", listProducts);
