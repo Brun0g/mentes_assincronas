@@ -8,7 +8,6 @@ const transportador = nodemailer.createTransport({
     pass: "odhw ktok hqvk zztf",
   },
   secure: true,
-  tls: { rejectUnauthorized: false },
 });
 
 module.exports = transportador;
