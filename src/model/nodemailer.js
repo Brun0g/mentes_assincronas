@@ -7,8 +7,9 @@ const transportador = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-  secure: true,
+  secure: false,
   tls: { rejectUnauthorized: false },
+  connectionTimeout: 30000,
 });
 
 module.exports = transportador;
