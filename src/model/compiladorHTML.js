@@ -1,13 +1,10 @@
-const fs = require("fs").promises;
+const fs = require("fs/promises");
+const handlebars = require("handlebars");
 
-async function compiladorHTML() {
-  try {
-    const filePath = "./src/Email.html";
-    const fileContent = await fs.readFile(filePath, "utf8");
-    return fileContent;
-  } catch (error) {
-    console.error("Error reading the file:", error);
-  }
-}
+const compiladorHTML = async (arquivo, contexto) => {
+  const html = await fs.readFile(arquivo);
+  const compilador = handlebars.compile(html.toString());
+  return compilador(contexto);
+};
 
 module.exports = compiladorHTML;
