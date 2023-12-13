@@ -73,6 +73,7 @@ const requests = async (req, res) => {
       html: email_html,
     });
     console.log(clientExists.rows[0].email);
+    console.log(clientExists.rows[0].nome);
 
     return res.status(201).json({ Mensagem: "Order created successfully.", record });
   } catch (error) {
