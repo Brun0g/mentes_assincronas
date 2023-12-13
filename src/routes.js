@@ -22,7 +22,7 @@ const productUpdate = require("./controller/productUpdate");
 const productDelete = require("./controller/productDelete");
 const productDetail = require("./controller/productDetail");
 const listProducts = require("./controller/listProducts");
-const { requests } = require("./controller/requests");
+const requests = require("./controller/requests");
 const listClient = require("./controller/listClients");
 
 const routes = express();
