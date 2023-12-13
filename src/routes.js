@@ -38,13 +38,13 @@ routes.get("/usuario", userProfile);
 routes.put("/usuario", userRegistrationValidation, updateUser);
 routes.post("/cliente", clientValidation, clientRegistration);
 routes.put("/cliente/:id", clientValidation, updateClient);
-routes.get("/cliente", listClient)
+routes.get("/cliente", listClient);
 routes.get("/cliente/:id", detailClient);
 routes.post("/produto", categoryValidation, productRegister);
 routes.get("/produto", listProducts);
 routes.get("/produto/:id", productDetail);
 routes.put("/produto/:id", categoryValidation, productUpdate);
 routes.delete("/produto/:id", productDelete);
-routes.post("/pedido", validateBodyRequest(esquemaPedido), requests);
+routes.post("/pedido", requests);
 
 module.exports = routes;
