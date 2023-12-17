@@ -24,6 +24,7 @@ const productDetail = require("./controller/productDetail");
 const listProducts = require("./controller/listProducts");
 const requests = require("./controller/requests");
 const listClient = require("./controller/listClients");
+const requestList = require("./controller/requestList");
 
 const routes = express();
 
@@ -46,5 +47,6 @@ routes.get("/produto/:id", productDetail);
 routes.put("/produto/:id", categoryValidation, productUpdate);
 routes.delete("/produto/:id", productDelete);
 routes.post("/pedido", requests);
+routes.get("/pedido", requestList);
 
 module.exports = routes;
