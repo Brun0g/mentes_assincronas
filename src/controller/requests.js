@@ -1,7 +1,5 @@
 require("dotenv").config();
 const { pool } = require("../model/model.js");
-const fs = require("fs").promises;
-const nodemailer = require("nodemailer");
 
 const compiladorHtml = require("../model/compiladorHTML");
 const transportador = require("../model/nodemailer");
