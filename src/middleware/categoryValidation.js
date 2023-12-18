@@ -2,6 +2,7 @@ const { pool } = require("../model/model.js");
 
 const categoryValidation = async (req, res, next) => {
     const { categoria_id } = req.body;
+    console.log("Request Body:", req.body);
 
     if (!categoria_id) {
         return res.status(400).json({ message: "Category ID not provided!" });
