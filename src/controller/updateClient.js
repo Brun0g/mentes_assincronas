@@ -16,7 +16,7 @@ const updateClient = async (req, res) => {
             [nome, email, cpf, id]
         );
 
-        return res.status(201).json(updatedClient.rows[0]);
+        return res.status(200).json(updatedClient.rows[0]);
     } catch (error) {
         console.error(error);
         return res.status(400).json({ message: "Client update error." });

@@ -25,6 +25,8 @@ const productDetail = require("./controller/productDetail");
 const listProducts = require("./controller/listProducts");
 const requests = require("./controller/requests");
 const listClient = require("./controller/listClients");
+const requestList = require("./controller/requestList");
+const validationDeleteProduct = require("./middleware/validationDeleteProduct");
 
 const routes = express();
 
@@ -45,8 +47,9 @@ routes.post("/produto", categoryValidation, multer.single('produto_imagem'), pro
 routes.get("/produto", listProducts);
 routes.get("/produto/:id", productDetail);
 routes.put("/produto/:id", categoryValidation, multer.single('produto_imagem'), productUpdate);
-routes.delete("/produto/:id", productDelete);
+routes.delete("/produto/:id", validationDeleteProduct, productDelete);
 routes.post("/pedido", requests);
+routes.get("/pedido", requestList);
 
 
 module.exports = routes;

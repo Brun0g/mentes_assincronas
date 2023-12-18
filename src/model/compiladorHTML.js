@@ -1,18 +1,11 @@
-const fs = require("fs").promises;
+const fs = require("fs/promises");
+const handlebars = require("handlebars");
 
-async function compiladorHTML(filePath, data) {
-  try {
-    let htmlContent = await fs.readFile(filePath, "utf-8");
+const compiladorHtml = async (arquivo, contexto) => {
+  const html = await fs.readFile(arquivo);
+  const compilador = handlebars.compile(html.toString());
+  const htmlString = compilador(contexto);
+  return htmlString;
+};
 
-    for (const [key, value] of Object.entries(data)) {
-      const placeholder = new RegExp(`{{${key}}}`, "g");
-      htmlContent = htmlContent.replace(placeholder, value);
-    }
-
-    return htmlContent;
-  } catch (error) {
-    throw new Error(`Error reading or compiling HTML template: ${error.message}`);
-  }
-}
-
-module.exports = compiladorHTML;
+module.exports = compiladorHtml;
