@@ -1,7 +1,9 @@
 require("dotenv").config();
 const { pool } = require("../model/model.js");
+const fs = require("fs").promises;
+const nodemailer = require("nodemailer");
 
-const compiladorHTML = require("../model/compiladorHTML");
+const compiladorHtml = require("../model/compiladorHTML");
 const transportador = require("../model/nodemailer");
 
 const requests = async (req, res) => {
@@ -65,7 +67,7 @@ const requests = async (req, res) => {
       orderProducts,
     };
 
-    const email_html = await compiladorHTML("src/Email.html", { nome: clientExists.rows[0].nome, id: newOrder.rows[0].id });
+    const email_html = await compiladorHtml("src/Email.html", { nome: clientExists.rows[0].nome, id: newOrder.rows[0].id });
     transportador.sendMail({
       from: `${process.env.EMAIL_NAME} <${process.env.EMAIL_FROM}>`,
       to: `${clientExists.rows[0].nome} <${clientExists.rows[0].email}>`,
