@@ -67,7 +67,7 @@ const requests = async (req, res) => {
 
     const email_html = await compiladorHTML("src/Email.html", { nome: clientExists.rows[0].nome, id: newOrder.rows[0].id });
     transportador.sendMail({
-      from: "API-PDV <usarmyunidademilsim@gmail.com>",
+      from: `${process.env.EMAIL_NAME} <${process.env.EMAIL_FROM}>`,
       to: `${clientExists.rows[0].nome} <${clientExists.rows[0].email}>`,
       subject: "Order registration",
       html: email_html,
