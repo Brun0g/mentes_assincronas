@@ -1,37 +1,54 @@
-const aws = require('aws-sdk')
+const { S3Client, PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
+const { fromIni } = require("@aws-sdk/credential-provider-ini");
 
-const endpoint = new aws.Endpoint(process.env.ENDPOINT_S3)
-
-const s3 = new aws.S3({
-  endpoint,
-  credentials: {
+const client = new S3Client({
+  region: "sa-east-1", // Substitua pela sua região
+  endpoint: process.env.ENDPOINT_S3,
+  credentials: fromIni({
     accessKeyId: process.env.KEY_ID,
-    secretAccessKey: process.env.APP_KEY
-  }
-})
+    secretAccessKey: process.env.APP_KEY,
+  }),
+});
 
 const uploadFile = async (path, buffer, mimetype) => {
-  const arquivo = await s3.upload({
+  const uploadParams = {
     Bucket: process.env.BLACKBLAZE_BUCKET,
     Key: path,
     Body: buffer,
-    ContentType: mimetype
-  }).promise()
+    ContentType: mimetype,
+  };
 
-  return {
-    url: arquivo.Location,
-    path: arquivo.Key
+  const command = new PutObjectCommand(uploadParams);
+
+  try {
+    const response = await client.send(command);
+    return {
+      url: response.Location,
+      path: response.Key,
+    };
+  } catch (err) {
+    console.error("Error uploading file:", err);
+    throw err;
   }
-}
+};
 
 const excluirArquivo = async (path) => {
-  await s3.deleteObject({
+  const deleteParams = {
     Bucket: process.env.BLACKBLAZE_BUCKET,
-    Key: path
-  }).promise()
-}
+    Key: path,
+  };
+
+  const command = new DeleteObjectCommand(deleteParams);
+
+  try {
+    await client.send(command);
+  } catch (err) {
+    console.error("Error deleting file:", err);
+    throw err;
+  }
+};
 
 module.exports = {
   uploadFile,
-  excluirArquivo
-}
+  excluirArquivo,
+};
