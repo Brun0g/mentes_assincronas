@@ -1,54 +1,53 @@
-const { S3Client, PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
-const { fromIni } = require("@aws-sdk/credential-provider-ini");
+const aws = require('aws-sdk')
 
-const client = new S3Client({
-  region: "sa-east-1", // Substitua pela sua região
-  endpoint: process.env.ENDPOINT_S3,
-  credentials: fromIni({
+const endpoint = new aws.Endpoint(process.env.ENDPOINT_S3)
+
+const s3 = new aws.S3({
+  endpoint,
+  credentials: {
     accessKeyId: process.env.KEY_ID,
-    secretAccessKey: process.env.APP_KEY,
-  }),
-});
+    secretAccessKey: process.env.APP_KEY
+  }
+})
 
 const uploadFile = async (path, buffer, mimetype) => {
-  const uploadParams = {
+  const arquivo = await s3.upload({
     Bucket: process.env.BLACKBLAZE_BUCKET,
     Key: path,
     Body: buffer,
-    ContentType: mimetype,
-  };
+    ContentType: mimetype
+  }).promise()
 
-  const command = new PutObjectCommand(uploadParams);
-
-  try {
-    const response = await client.send(command);
-    return {
-      url: response.Location,
-      path: response.Key,
-    };
-  } catch (err) {
-    console.error("Error uploading file:", err);
-    throw err;
+  return {
+    url: arquivo.Location,
+    path: arquivo.Key
   }
-};
+}
+
+const listagemArquivos = async () => {
+  const arquivos = await s3.listObjects({
+    Bucket: process.env.BLACKBLAZE_BUCKET
+  }).promise()
+
+  const files = arquivos.Contents.map((file) => {
+    return {
+      url: `https://${process.env.BACKBLAZE_BUCKET}.${process.env.ENDPOINT_S3}/${file.Key}`,
+      path: file.Key
+    }
+  })
+
+  return files
+}
 
 const excluirArquivo = async (path) => {
-  const deleteParams = {
+  await s3.deleteObject({
     Bucket: process.env.BLACKBLAZE_BUCKET,
-    Key: path,
-  };
-
-  const command = new DeleteObjectCommand(deleteParams);
-
-  try {
-    await client.send(command);
-  } catch (err) {
-    console.error("Error deleting file:", err);
-    throw err;
-  }
-};
+    Key: path
+  }).promise()
+}
 
 module.exports = {
   uploadFile,
-  excluirArquivo,
-};
+  listagemArquivos,
+  excluirArquivo
+}
