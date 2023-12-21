@@ -4,8 +4,7 @@ const { uploadFile } = require('../middleware/storage');
 
 const productRegister = async (req, res) => {
   const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
-  const { file } = req
-  console.log("Request Body:", req.body);
+  const { file } = req;
 
   if (!descricao || !quantidade_estoque || !valor || !categoria_id) {
     return res.status(400).json({ message: "All fields are mandatory!" });
@@ -25,7 +24,7 @@ const productRegister = async (req, res) => {
       file.buffer,
       file.mimetype
     )
-    const result = await pool.query("INSERT INTO produtos (descricao, quantidade_estoque, valor, categoria_id, produto_imagem) VALUES ($1, $2, $3, $4, $5) RETURNING id, descricao, quantidade_estoque, valor, categoria_id, produto_imagem", [
+    const result = await pool.query("insert into produtos (descricao, quantidade_estoque, valor, categoria_id, produto_imagem) values ($1, $2, $3, $4, $5) returning id, descricao, quantidade_estoque, valor, categoria_id, produto_imagem", [
       descricao,
       quantidade_estoque,
       valor,
@@ -37,7 +36,7 @@ const productRegister = async (req, res) => {
 
     return res.status(201).json(insertedProduct);
   } catch (error) {
-    return res.status(500).json({ message: "Internal server error" + error.message });
+    return res.status(500).json({ message: "Error product register" });
   }
 };
 
